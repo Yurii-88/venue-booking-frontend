@@ -12,6 +12,7 @@ export default function AvailabilityPage() {
   const [venue, setVenueData] = useState<Venue | null>(null);
   const [slots, setSlots] = useState<TimeSlot[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (!venueId) return;
@@ -26,8 +27,9 @@ export default function AvailabilityPage() {
         const slotsRes = await fetch(`${API_URL}/availability/${venueId}`);
         const slotsData = await slotsRes.json();
         setSlots(slotsData);
-      } catch (error) {
-        console.error('Failed to fetch data:', error);
+      } catch (err) {
+        console.error('Failed to fetch data:', err);
+        setError('Failed to load venue availability. Please try again.');
       } finally {
         setLoading(false);
       }
@@ -37,6 +39,7 @@ export default function AvailabilityPage() {
   }, [venueId, setVenue]);
 
   if (loading) return <div className="p-8">Loading...</div>;
+  if (error) return <div className="p-8 text-red-600">{error}</div>;
   if (!venue) return <div className="p-8">Venue not found</div>;
 
   return (

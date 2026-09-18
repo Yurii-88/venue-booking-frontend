@@ -7,6 +7,7 @@ export default function HomePage() {
   const navigate = useNavigate();
   const [venues, setVenues] = useState<Venue[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchVenues = async () => {
@@ -14,8 +15,9 @@ export default function HomePage() {
         const response = await fetch(`${API_URL}/venues`);
         const data = await response.json();
         setVenues(data);
-      } catch (error) {
-        console.error('Failed to fetch venues:', error);
+      } catch (err) {
+        console.error('Failed to fetch venues:', err);
+        setError('Failed to load venues. Please try again.');
       } finally {
         setLoading(false);
       }
@@ -25,6 +27,7 @@ export default function HomePage() {
   }, []);
 
   if (loading) return <div className="p-8">Loading...</div>;
+  if (error) return <div className="p-8 text-red-600">{error}</div>;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
