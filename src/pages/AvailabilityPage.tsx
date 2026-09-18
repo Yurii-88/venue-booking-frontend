@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useBookingStore } from '../store/bookingStore';
+import { API_URL } from '../lib/api';
 import type { TimeSlot, Venue } from '../types';
 
 export default function AvailabilityPage() {
@@ -17,16 +18,12 @@ export default function AvailabilityPage() {
 
     const fetchData = async () => {
       try {
-        const venueRes = await fetch(
-          `http://localhost:5000/api/venues/${venueId}`,
-        );
+        const venueRes = await fetch(`${API_URL}/venues/${venueId}`);
         const venueData = await venueRes.json();
         setVenueData(venueData);
         setVenue(venueId);
 
-        const slotsRes = await fetch(
-          `http://localhost:5000/api/availability/${venueId}`,
-        );
+        const slotsRes = await fetch(`${API_URL}/availability/${venueId}`);
         const slotsData = await slotsRes.json();
         setSlots(slotsData);
       } catch (error) {

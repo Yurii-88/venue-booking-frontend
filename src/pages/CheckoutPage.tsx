@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useBookingStore } from '../store/bookingStore';
+import { API_URL } from '../lib/api';
 
 export default function CheckoutPage() {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function CheckoutPage() {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/bookings', {
+      const response = await fetch(`${API_URL}/bookings`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

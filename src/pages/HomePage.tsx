@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { API_URL } from '../lib/api';
 import type { Venue } from '../types';
 
 export default function HomePage() {
@@ -10,7 +11,7 @@ export default function HomePage() {
   useEffect(() => {
     const fetchVenues = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/venues');
+        const response = await fetch(`${API_URL}/venues`);
         const data = await response.json();
         setVenues(data);
       } catch (error) {
