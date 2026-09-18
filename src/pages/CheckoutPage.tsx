@@ -108,7 +108,7 @@ export default function CheckoutPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg disabled:opacity-50"
+              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg disabled:opacity-50 cursor-pointer"
             >
               {loading ? 'Processing...' : 'Confirm Booking'}
             </button>

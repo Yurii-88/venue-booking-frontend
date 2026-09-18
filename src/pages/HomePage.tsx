@@ -45,14 +45,16 @@ export default function HomePage() {
           {venues.map((venue) => (
             <div
               key={venue.id}
-              onClick={() => navigate(`/availability/${venue.id}`)}
-              className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow p-8 cursor-pointer"
+              className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow p-8"
             >
               <h2 className="text-3xl font-bold text-gray-900 mb-2">
                 {venue.name}
               </h2>
               <p className="text-lg text-gray-600 mb-6">📍 {venue.location}</p>
-              <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg transition-colors">
+              <button
+                onClick={() => navigate(`/availability/${venue.id}`)}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg transition-colors cursor-pointer"
+              >
                 Book Now
               </button>
             </div>
